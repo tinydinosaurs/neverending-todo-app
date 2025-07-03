@@ -2,6 +2,7 @@ import { TaskStatus, TaskPriority } from '../types/task';
 import { formatEnum } from '../utils/format';
 import { useForm, Controller } from 'react-hook-form';
 import { Field, Input, Textarea, Button } from '@chakra-ui/react';
+import { BUTTON_LABELS, FORM_LABELS, HELP_TEXT } from '../constants/ui';
 
 export interface TaskFormState {
 	title: string;
@@ -22,7 +23,7 @@ interface TaskFormProps {
 export const TaskForm = ({
 	onSubmit,
 	initialValues,
-	submitLabel = 'Add Task',
+	submitLabel = BUTTON_LABELS.ADD_TASK,
 	ariaLabel = 'Task form',
 	onCancel,
 }: TaskFormProps) => {
@@ -54,7 +55,7 @@ export const TaskForm = ({
 		>
 			<Field.Root required>
 				<Field.Label htmlFor="task-title">
-					Task Title <Field.RequiredIndicator />
+					{FORM_LABELS.TASK_TITLE} <Field.RequiredIndicator />
 				</Field.Label>
 				<Input
 					id="task-title"
@@ -69,11 +70,13 @@ export const TaskForm = ({
 					<div style={{ color: 'red' }}>{errors.title.message}</div>
 				)}
 				<div id="title-help" className="sr-only">
-					Enter a descriptive title for your task
+					{HELP_TEXT.TITLE}
 				</div>
 			</Field.Root>
 			<div style={{ marginBottom: '1rem' }}>
-				<label htmlFor="task-description">Description</label>
+				<label htmlFor="task-description">
+					{FORM_LABELS.DESCRIPTION}
+				</label>
 				<Textarea
 					id="task-description"
 					placeholder="Enter task description"
@@ -82,7 +85,7 @@ export const TaskForm = ({
 					{...register('description')}
 				/>
 				<div id="description-help" className="sr-only">
-					Provide additional details about the task
+					{HELP_TEXT.DESCRIPTION}
 				</div>
 			</div>
 
@@ -92,7 +95,9 @@ export const TaskForm = ({
 				rules={{ required: 'Status is required' }}
 				render={({ field }) => (
 					<div style={{ marginBottom: '1rem' }}>
-						<label htmlFor="task-status">Status</label>
+						<label htmlFor="task-status">
+							{FORM_LABELS.STATUS}
+						</label>
 						<select
 							{...field}
 							id="task-status"
@@ -111,7 +116,7 @@ export const TaskForm = ({
 							</div>
 						)}
 						<div id="status-help" className="sr-only">
-							Select the current status of the task
+							{HELP_TEXT.STATUS}
 						</div>
 					</div>
 				)}
@@ -122,7 +127,9 @@ export const TaskForm = ({
 				control={control}
 				render={({ field }) => (
 					<div style={{ marginBottom: '1rem' }}>
-						<label htmlFor="task-priority">Priority</label>
+						<label htmlFor="task-priority">
+							{FORM_LABELS.PRIORITY}
+						</label>
 						<select
 							{...field}
 							id="task-priority"
@@ -141,14 +148,14 @@ export const TaskForm = ({
 							</div>
 						)}
 						<div id="priority-help" className="sr-only">
-							Select the priority level for the task
+							{HELP_TEXT.PRIORITY}
 						</div>
 					</div>
 				)}
 			/>
 
 			<div style={{ marginBottom: '1rem' }}>
-				<label htmlFor="task-due-date">Due Date</label>
+				<label htmlFor="task-due-date">{FORM_LABELS.DUE_DATE}</label>
 				<input
 					id="task-due-date"
 					type="date"
@@ -159,7 +166,7 @@ export const TaskForm = ({
 					<div style={{ color: 'red' }}>{errors.dueDate.message}</div>
 				)}
 				<div id="due-date-help" className="sr-only">
-					Select the date when the task should be completed
+					{HELP_TEXT.DUE_DATE}
 				</div>
 			</div>
 
@@ -173,11 +180,11 @@ export const TaskForm = ({
 					ml={2}
 					variant="outline"
 				>
-					Cancel
+					{BUTTON_LABELS.CANCEL}
 				</Button>
 			)}
 			<div id="submit-help" className="sr-only">
-				Click to save the task
+				{HELP_TEXT.SUBMIT}
 			</div>
 		</form>
 	);

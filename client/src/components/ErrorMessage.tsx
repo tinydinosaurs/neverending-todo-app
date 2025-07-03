@@ -1,3 +1,5 @@
+import { BUTTON_LABELS, ARIA_LABELS } from '../constants/ui';
+
 interface ErrorMessageProps {
 	message: string;
 	onRetry?: () => void;
@@ -24,9 +26,9 @@ export const ErrorMessage = ({
 				<button
 					onClick={onRetry}
 					style={{ marginTop: '10px' }}
-					aria-label="Retry loading content"
+					aria-label={ARIA_LABELS.RETRY_LOADING}
 				>
-					Retry
+					{BUTTON_LABELS.RETRY}
 				</button>
 			)}
 		</div>

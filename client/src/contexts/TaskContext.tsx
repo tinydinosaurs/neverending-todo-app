@@ -10,6 +10,7 @@ import React, {
 import { Task } from '../types/task';
 import { taskApi } from '../services/api';
 import { TaskFormState } from '../components/TaskForm';
+import { MESSAGES } from '../constants/ui';
 
 interface TaskContextType {
 	// State
@@ -18,7 +19,7 @@ interface TaskContextType {
 	error: string | null;
 	statusFilter: string;
 	priorityFilter: string;
-	toast: string;
+	toast: string | null;
 
 	// Actions
 	setStatusFilter: (status: string) => void;
@@ -43,7 +44,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
 	const [error, setError] = useState<string | null>(null);
 	const [statusFilter, setStatusFilter] = useState<string>('');
 	const [priorityFilter, setPriorityFilter] = useState<string>('');
-	const [toast, setToast] = useState<string>('');
+	const [toast, setToast] = useState<string | null>(null);
 
 	const fetchTasks = useCallback(async () => {
 		try {
@@ -86,7 +87,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
 				setError(null);
 				await taskApi.deleteTask(id);
 				await fetchTasks();
-				setToast('Task deleted!');
+				setToast(MESSAGES.TASK_DELETED);
 			} catch (err) {
 				setError(
 					err instanceof Error ? err.message : 'An error occurred'
@@ -123,7 +124,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
 		setStatusFilter('');
 	}, []);
 
-	const clearToast = useCallback(() => setToast(''), []);
+	const clearToast = useCallback(() => setToast(null), []);
 
 	useEffect(() => {
 		fetchTasks();

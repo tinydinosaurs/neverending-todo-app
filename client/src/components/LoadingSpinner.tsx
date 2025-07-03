@@ -1,10 +1,12 @@
+import { MESSAGES } from '../constants/ui';
+
 interface LoadingSpinnerProps {
 	message?: string;
 	ariaLabel?: string;
 }
 
 export const LoadingSpinner = ({
-	message = 'Loading...',
+	message = MESSAGES.LOADING,
 	ariaLabel = 'Loading content',
 }: LoadingSpinnerProps) => {
 	return (
@@ -18,6 +20,7 @@ export const LoadingSpinner = ({
 				⏳
 			</div>
 			<div>{message}</div>
+			<div className="sr-only">{MESSAGES.LOADING_TASKS}</div>
 		</div>
 	);
 };

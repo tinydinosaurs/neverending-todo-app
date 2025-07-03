@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { TaskForm, TaskFormState } from './TaskForm';
 import { useTaskContext } from '../contexts/TaskContext';
+import { BUTTON_LABELS, DIALOG_LABELS } from '../constants/ui';
 
 interface DialogProps {
 	title: string;
@@ -38,7 +39,10 @@ export const NewTaskDialog = createOverlay<DialogProps>((props) => {
 							{content}
 						</Dialog.Body>
 						<Dialog.CloseTrigger asChild>
-							<CloseButton size="sm" />
+							<CloseButton
+								size="sm"
+								aria-label={DIALOG_LABELS.CLOSE_DIALOG}
+							/>
 						</Dialog.CloseTrigger>
 					</Dialog.Content>
 				</Dialog.Positioner>
@@ -60,17 +64,17 @@ export const TaskDialogButton = () => {
 			<Button
 				onClick={() => {
 					NewTaskDialog.open('a', {
-						title: 'Add a new task',
+						title: DIALOG_LABELS.ADD_NEW_TASK,
 						content: (
 							<TaskForm
 								onSubmit={handleSubmit}
-								submitLabel="Add Task"
+								submitLabel={BUTTON_LABELS.ADD_TASK}
 							/>
 						),
 					});
 				}}
 			>
-				Add Task
+				{BUTTON_LABELS.ADD_TASK}
 			</Button>
 			<NewTaskDialog.Viewport />
 		</>

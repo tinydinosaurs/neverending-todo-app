@@ -1,9 +1,15 @@
-import React, { useState, useMemo, useCallback, useRef } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Task } from '../types/task';
 import { TaskForm } from './TaskForm';
 import { TaskFormState } from './TaskForm';
 import { TaskStatus, TaskPriority } from '../types/task';
 import { formatEnum } from '../utils/format';
+import {
+	BUTTON_LABELS,
+	DIALOG_LABELS,
+	ARIA_LABELS,
+	MESSAGES,
+} from '../constants/ui';
 import {
 	Button,
 	Card,
@@ -48,16 +54,9 @@ export const TaskItem = React.memo(
 			]
 		);
 
-		const handleUpdate = useCallback(
-			(form: TaskFormState) => {
-				onUpdate(task.id, form);
-			},
-			[onUpdate, task.id]
-		);
-
 		const handleEdit = useCallback(() => {
 			NewTaskDialog.open(`edit-task-${task.id}`, {
-				title: 'Edit Task',
+				title: DIALOG_LABELS.EDIT_TASK,
 				description: `Edit the details for "${task.title}"`,
 				content: (
 					<TaskForm
@@ -66,8 +65,8 @@ export const TaskItem = React.memo(
 							onUpdate(task.id, form);
 							NewTaskDialog.close(`edit-task-${task.id}`);
 						}}
-						submitLabel="Save Changes"
-						ariaLabel={`Edit task: ${task.title}`}
+						submitLabel={BUTTON_LABELS.SAVE_CHANGES}
+						ariaLabel={`${ARIA_LABELS.EDIT_TASK} ${task.title}`}
 						onCancel={() =>
 							NewTaskDialog.close(`edit-task-${task.id}`)
 						}
@@ -87,7 +86,7 @@ export const TaskItem = React.memo(
 					e.preventDefault();
 					if (
 						window.confirm(
-							`Are you sure you want to delete "${task.title}"?`
+							`${MESSAGES.DELETE_CONFIRMATION} "${task.title}"?`
 						)
 					) {
 						onDelete(task.id);
@@ -156,19 +155,19 @@ export const TaskItem = React.memo(
 					<Button
 						onClick={handleEdit}
 						type="button"
-						aria-label={`Edit task: ${task.title}`}
+						aria-label={`${ARIA_LABELS.EDIT_TASK} ${task.title}`}
 						colorScheme="blue"
 					>
-						Edit
+						{BUTTON_LABELS.EDIT}
 					</Button>
 					<Button
 						onClick={handleDelete}
 						onKeyDown={handleDeleteKeyDown}
 						type="button"
-						aria-label={`Delete task: ${task.title}`}
+						aria-label={`${ARIA_LABELS.DELETE_TASK} ${task.title}`}
 						colorScheme="red"
 					>
-						Delete
+						{BUTTON_LABELS.DELETE}
 					</Button>
 				</CardFooter>
 			</Card.Root>

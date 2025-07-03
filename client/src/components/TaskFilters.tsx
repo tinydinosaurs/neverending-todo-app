@@ -1,6 +1,13 @@
 import React from 'react';
 import { TaskStatus, TaskPriority } from '../types/task';
 import { Box, Stack, Text, Button } from '@chakra-ui/react';
+import {
+	FILTER_LABELS,
+	BUTTON_LABELS,
+	STATUS_DISPLAY,
+	PRIORITY_DISPLAY,
+	ARIA_LABELS,
+} from '../constants/ui';
 
 interface TaskFiltersProps {
 	status: string;
@@ -28,7 +35,7 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
 			mb={4}
 		>
 			<Text as="legend" textAlign="left" fontWeight="bold" mb={2}>
-				Filter Tasks
+				{FILTER_LABELS.FILTER_TASKS}
 			</Text>
 			<Stack
 				direction={{ base: 'column', md: 'row' }}
@@ -36,47 +43,59 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
 				className="task-filters-controls"
 			>
 				<div>
-					<label htmlFor="status-filter">Status:</label>
+					<label htmlFor="status-filter">
+						{FILTER_LABELS.STATUS}
+					</label>
 					<select
 						id="status-filter"
 						value={status}
 						onChange={(e) => setStatus(e.target.value)}
-						aria-label="Filter by task status"
+						aria-label={ARIA_LABELS.FILTER_BY_STATUS}
 						className="styled-select"
 					>
-						<option value="">All Statuses</option>
+						<option value="">{FILTER_LABELS.ALL_STATUSES}</option>
 						<option value={TaskStatus.NOTSTARTED}>
-							Not Started
+							{STATUS_DISPLAY.NOT_STARTED}
 						</option>
 						<option value={TaskStatus.INPROGRESS}>
-							In Progress
+							{STATUS_DISPLAY.IN_PROGRESS}
 						</option>
-						<option value={TaskStatus.COMPLETED}>Completed</option>
+						<option value={TaskStatus.COMPLETED}>
+							{STATUS_DISPLAY.COMPLETED}
+						</option>
 					</select>
 				</div>
 				<div>
-					<label htmlFor="priority-filter">Priority:</label>
+					<label htmlFor="priority-filter">
+						{FILTER_LABELS.PRIORITY}
+					</label>
 					<select
 						id="priority-filter"
 						value={priority}
 						onChange={(e) => setPriority(e.target.value)}
-						aria-label="Filter by task priority"
+						aria-label={ARIA_LABELS.FILTER_BY_PRIORITY}
 						className="styled-select"
 					>
-						<option value="">All Priorities</option>
-						<option value={TaskPriority.LOW}>Low</option>
-						<option value={TaskPriority.MEDIUM}>Medium</option>
-						<option value={TaskPriority.HIGH}>High</option>
+						<option value="">{FILTER_LABELS.ALL_PRIORITIES}</option>
+						<option value={TaskPriority.LOW}>
+							{PRIORITY_DISPLAY.LOW}
+						</option>
+						<option value={TaskPriority.MEDIUM}>
+							{PRIORITY_DISPLAY.MEDIUM}
+						</option>
+						<option value={TaskPriority.HIGH}>
+							{PRIORITY_DISPLAY.HIGH}
+						</option>
 					</select>
 				</div>
 				{onClear && (
 					<Button
 						type="button"
 						onClick={onClear}
-						aria-label="Clear all filters"
+						aria-label={ARIA_LABELS.CLEAR_ALL_FILTERS}
 						alignSelf="flex-end"
 					>
-						Clear Filters
+						{BUTTON_LABELS.CLEAR_FILTERS}
 					</Button>
 				)}
 			</Stack>
