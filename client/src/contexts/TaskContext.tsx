@@ -33,6 +33,7 @@ interface TaskContextType {
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
+export { TaskContext };
 
 interface TaskProviderProps {
 	children: ReactNode;
@@ -67,8 +68,11 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
 			try {
 				setError(null);
 				await taskApi.createTask({
-					...form,
-					due_date: form.dueDate,
+					title: form.title,
+					description: form.description,
+					status: form.status,
+					priority: form.priority,
+					due_date: form.dueDate ?? '',
 				});
 				await fetchTasks();
 				setToast('Task added!');
@@ -106,7 +110,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
 					description: form.description,
 					status: form.status,
 					priority: form.priority,
-					due_date: form.dueDate,
+					due_date: form.dueDate ?? '',
 				});
 				await fetchTasks();
 				setToast('Task updated!');

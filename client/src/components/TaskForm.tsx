@@ -53,9 +53,12 @@ export const TaskForm = ({
 			aria-label={ariaLabel}
 			style={{ marginBottom: '20px' }}
 		>
-			<Field.Root required>
-				<Field.Label htmlFor="task-title">
-					{FORM_LABELS.TASK_TITLE} <Field.RequiredIndicator />
+			<Field.Root id="task-title" style={{ marginBottom: '1rem' }}>
+				<Field.Label>
+					{FORM_LABELS.TASK_TITLE}{' '}
+					<span aria-hidden="true" style={{ color: 'red' }}>
+						*
+					</span>
 				</Field.Label>
 				<Input
 					id="task-title"
@@ -92,7 +95,6 @@ export const TaskForm = ({
 			<Controller
 				name="status"
 				control={control}
-				rules={{ required: 'Status is required' }}
 				render={({ field }) => (
 					<div style={{ marginBottom: '1rem' }}>
 						<label htmlFor="task-status">
@@ -110,11 +112,6 @@ export const TaskForm = ({
 								</option>
 							))}
 						</select>
-						{errors.status && (
-							<div style={{ color: 'red' }}>
-								{errors.status.message}
-							</div>
-						)}
 						<div id="status-help" className="sr-only">
 							{HELP_TEXT.STATUS}
 						</div>
@@ -142,11 +139,6 @@ export const TaskForm = ({
 								</option>
 							))}
 						</select>
-						{errors.priority && (
-							<div style={{ color: 'red' }}>
-								{errors.priority.message}
-							</div>
-						)}
 						<div id="priority-help" className="sr-only">
 							{HELP_TEXT.PRIORITY}
 						</div>

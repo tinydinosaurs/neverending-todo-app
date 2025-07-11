@@ -54,7 +54,7 @@ export const TaskItem = React.memo(
 			]
 		);
 
-		const handleEdit = useCallback(() => {
+		const handleUpdate = useCallback(() => {
 			NewTaskDialog.open(`edit-task-${task.id}`, {
 				title: DIALOG_LABELS.EDIT_TASK,
 				description: `Edit the details for "${task.title}"`,
@@ -153,7 +153,7 @@ export const TaskItem = React.memo(
 				</CardBody>
 				<CardFooter pt={2} display="flex" gap={2}>
 					<Button
-						onClick={handleEdit}
+						onClick={handleUpdate}
 						type="button"
 						aria-label={`${ARIA_LABELS.EDIT_TASK} ${task.title}`}
 						colorScheme="blue"

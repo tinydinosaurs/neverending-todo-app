@@ -20,7 +20,13 @@ export const Toast: React.FC<ToastProps> = ({
 	if (!message) return null;
 
 	return (
-		<div className="toast" role="status" aria-live="polite" tabIndex={0}>
+		<div
+			className="toast"
+			data-testid="toast"
+			role="status"
+			aria-live="polite"
+			tabIndex={0}
+		>
 			{message}
 		</div>
 	);

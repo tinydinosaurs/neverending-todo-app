@@ -21,7 +21,7 @@ export const ErrorMessage = ({
 			<div style={{ marginBottom: '10px' }} aria-hidden="true">
 				❌
 			</div>
-			<div>Error: {message}</div>
+			<div>{message}</div>
 			{onRetry && (
 				<button
 					onClick={onRetry}
